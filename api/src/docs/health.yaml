@@ -1,0 +1,38 @@
+components:
+  schemas:
+    Health:
+      type: object
+      properties:
+        uptime:
+          type: number
+          description: The uptime in milliseconds since server start
+        message:
+          type: string
+          description: Healthy message
+        date:
+          type: string
+          format: date-time
+          description: The date-time of the request
+      example:
+        uptime: 413.934154022
+        message: API is healthy
+        date: 2023-03-30T08:45:11.283Z
+
+tags:
+  name: Health
+  description: The health check API
+
+paths:
+  /health:
+    get:
+      summary: |
+        Get API health
+      tags:
+        - Health
+      responses:
+        200:
+          description: Successful Health Check
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
