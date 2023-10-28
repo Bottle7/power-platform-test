@@ -1,0 +1,11 @@
+'GH Infra':
+  - .github/*
+
+'GH Infra Config':
+  - .github/configs/*
+
+'API':
+  - api/*
+
+'Frontend':
+  - frontend/*
