@@ -1,0 +1,28 @@
+name: Build and Upload Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Export
+        uses: docker/build-push-action@v5
+        with:
+          context: ./api
+          tags: api:${{ github.event.pull_request.number }}
+          outputs: type=docker,dest=/tmp/api_${{ github.event.pull_request.number }}.tar
+
+      - name: Upload Image Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: api_${{ github.event.pull_request.number }}
+          path: /tmp/api_${{ github.event.pull_request.number }}.tar
