@@ -1,0 +1,27 @@
+name: Deploy API
+
+on:
+  workflow_run:
+    workflows: ["Build and Upload Image"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    name: Deploy API
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    environment: development
+    steps:
+      - name: Download Built Image
+        uses: actions/download-artifact@v3
+        with:
+          name: api_${{ github.event.workflow_run.pull_requests[0].number }}
+          path: /tmp
+
+      - name: Load Image
+        run: |
+          docker load -i /tmp/api_${{ github.event.workflow_run.pull_requests[0].number }}.tar
+          docker image ls -a
+
+      ## TODO: Add deployment steps here
