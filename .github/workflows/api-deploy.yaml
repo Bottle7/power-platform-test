@@ -19,7 +19,7 @@ jobs:
         with:
           workflow: build-upload-image.yaml
           path: ${{ github.workspace }}
-          name: api.tar
+          name: api
 
       - name: Load Image
         run: |
