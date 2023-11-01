@@ -23,6 +23,7 @@ jobs:
       - name: Build Image
         id: docker_build
         run: |
+          cd api/
           docker build -t api:${{ github.event.pull_request.number }} .
           docker save -o api.tar api:${{ github.event.pull_request.number }}
 
