@@ -18,7 +18,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./api
-          tags: api:${{ github.event.pull_request.number }}
+          tags: api:"${{ github.event.pull_request.number }}"
           outputs: type=docker,dest=/tmp/api_${{ github.event.pull_request.number }}.tar
 
       - name: Upload Image Artifact
