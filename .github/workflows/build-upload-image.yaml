@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: api_${{ github.event.pull_request.number }}
-          path: /tmp/api_${{ github.event.pull_request.number }}.tar
+          path: dist
