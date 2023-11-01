@@ -25,10 +25,13 @@ jobs:
         run: |
           cd api/
           docker build -t api:${{ github.event.pull_request.number }} .
-          docker save -o api.tar api:${{ github.event.pull_request.number }}
+          docker save -o ${{ github.workspace }}/api.tar api:${{ github.event.pull_request.number }}
+
+      - name: List Workspace Directory Contents
+        run: ls -la ${{ github.workspace }}
 
       - name: Upload Image Artifact
         uses: actions/upload-artifact@v3
         with:
           name: api
-          path: api.tar
+          path: ${{ github.workspace }}/api.tar
