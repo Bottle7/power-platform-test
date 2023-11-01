@@ -37,8 +37,8 @@ jobs:
         run: |
           docker create --name build-container api:${{ github.event.pull_request[0].number }}
           docker start build-container
-          docker exec build-container zip -r solution.zip /app/dist
-          docker cp build-container:/app/solution.zip ./solution.zip
+          docker exec build-container bash -c "zip -r /solution.zip /app/dist"
+          docker cp build-container:/solution.zip ./solution.zip
           docker stop build-container
           docker rm build-container
 
