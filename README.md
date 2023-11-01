@@ -5,4 +5,4 @@ Repository for testing the deployment to MS Power Platform
 
 Demonstrate the use of GitHub Actions to deploy a NodeJS application to a Power Platform environment.
 
-<!-- Trigger 2 -->
+<!-- Trigger 3 -->
