@@ -25,7 +25,7 @@ jobs:
         with:
           context: ./api
           tags: api:${{ github.event.pull_request.number }}
-          outputs: type=docker,dest=/dist/api_${{ github.event.pull_request.number }}.tar
+          outputs: type=docker,dest=/tmp/api_${{ github.event.pull_request.number }}.tar
 
       - name: Upload Image Artifact
         uses: actions/upload-artifact@v3
