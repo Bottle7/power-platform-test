@@ -17,7 +17,7 @@ jobs:
       - name: Download Built Image
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Build and Upload Image
+          workflow: build-upload-image.yaml
           name: api
 
       - name: Load Image
