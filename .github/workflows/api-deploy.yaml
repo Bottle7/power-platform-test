@@ -18,11 +18,11 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Build and Upload Image
-          name: api_${{ github.event.workflow_run.pull_requests[0].number }}
+          name: api
 
       - name: Load Image
         run: |
-          docker load -i /tmp/api_${{ github.event.workflow_run.pull_requests[0].number }}.tar
+          docker load -i /tmp/api.tar
           docker image ls -a
 
       ## TODO: Add deployment steps here
