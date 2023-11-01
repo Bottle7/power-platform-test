@@ -23,7 +23,7 @@ jobs:
 
       - name: Load Image
         run: |
-          docker load -i api.tar
+          docker load -i api
           docker image ls -a
 
       ## TODO: Add deployment steps here
