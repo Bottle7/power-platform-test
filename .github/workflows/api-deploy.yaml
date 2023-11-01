@@ -17,7 +17,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: api_${{ github.event.workflow_run.pull_requests[0].number }}
-          path: /tmp
+          path: build
 
       - name: Load Image
         run: |
