@@ -29,4 +29,24 @@ jobs:
           docker load -i api.tar
           docker image ls -a
 
-      ## TODO: Add deployment steps here
+      - name: Install Power Platform Tools
+        uses: microsoft/powerplatform-actions/actions-install@v1.2.0
+
+      - name: Create Solution Zip
+        id: create-zip
+        run: |
+          docker create --name build-container api:${{ github.event.pull_request[0].number }}
+          docker start build-container
+          docker exec build-container zip -r solution.zip /app/dist
+          docker cp build-container:/solution.zip ./solution.zip
+          docker stop build-container
+          docker rm build-container
+
+      - name: Import Solution
+        uses: microsoft/powerplatform-actions/import-solution@v1.2.0
+        with:
+          solution-file: solution.zip
+          environment-url: org628a9ff7.crm3.dynamics.com
+          app-id: ${{ secrets.APP_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          tenant-id: ${{ secrets.TENANT_ID }}
