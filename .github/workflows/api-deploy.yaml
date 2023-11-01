@@ -2,7 +2,8 @@ name: Deploy API
 
 on:
   workflow_run:
-    workflows: ["Build and Upload Image"]
+    workflows:
+      - Build and Upload Image
     types:
       - completed
 
