@@ -21,6 +21,9 @@ jobs:
           path: ${{ github.workspace }}
           name: api
 
+      - name: List Files
+        run: ls -al
+
       - name: Load Image
         run: |
           docker load -i api
