@@ -24,8 +24,8 @@ jobs:
         id: docker_build
         run: |
           cd api/
-          docker build -t api:${{ github.event.pull_request.number }} .
-          docker save -o ${{ github.workspace }}/api.tar api:${{ github.event.pull_request.number }}
+          docker build -t api:latest .
+          docker save -o ${{ github.workspace }}/api.tar api:latest
 
       - name: List Workspace Directory Contents
         run: ls -la ${{ github.workspace }}
