@@ -39,7 +39,7 @@ jobs:
           docker start build-container
           docker exec build-container ls -la
           docker exec build-container zip solution.zip dist
-          docker cp build-container:solution.zip .
+          docker cp build-container:/app/solution.zip .
           docker stop build-container
           docker rm build-container
 
