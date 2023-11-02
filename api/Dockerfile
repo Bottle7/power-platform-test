@@ -16,8 +16,6 @@ RUN npm cache clean -f
 
 RUN npm run build
 
-COPY ./dist .
-
 EXPOSE 3000
 
 CMD ["npm", "run", "start"]
