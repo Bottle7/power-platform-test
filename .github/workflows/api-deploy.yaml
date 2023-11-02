@@ -37,7 +37,7 @@ jobs:
         run: |
           docker create --name build-container api
           docker start build-container
-          docker exec build-container zip -r solution.zip /app/dist
+          docker exec build-container zip -r solution.zip /dist
           docker cp build-container:/solution.zip ./solution.zip
           docker stop build-container
           docker rm build-container
