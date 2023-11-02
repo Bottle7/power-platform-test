@@ -38,7 +38,7 @@ jobs:
           docker create --name build-container api
           docker start build-container
           docker exec build-container ls -la
-          docker exec build-container zip -r solution.zip /dist
+          docker exec build-container zip -r solution.zip . -i dist
           docker cp build-container:/solution.zip ./solution.zip
           docker stop build-container
           docker rm build-container
