@@ -12,9 +12,9 @@ COPY . .
 
 RUN npm cache clean -f
 
-RUN npx tsc
+RUN npm run build
 
-COPY /dist .
+COPY ./dist .
 
 EXPOSE 3000
 
