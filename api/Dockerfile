@@ -8,6 +8,8 @@ COPY package*.json .
 
 RUN npm i
 
+RUN npm i -D typescript@5.0.4
+
 COPY . .
 
 RUN npm cache clean -f
