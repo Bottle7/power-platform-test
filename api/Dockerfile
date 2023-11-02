@@ -12,6 +12,10 @@ COPY . .
 
 RUN npm cache clean -f
 
+RUN npx tsc
+
+COPY /dist .
+
 EXPOSE 3000
 
-CMD ["npx", "tsc"]
+CMD ["npm", "run", "start"]
