@@ -1,5 +1,11 @@
 FROM node:20-bullseye-slim
 
+USER root
+
+RUN apt-get update && apt-get install -y zip
+
+USER node
+
 WORKDIR /app
 
 COPY package*.json .
