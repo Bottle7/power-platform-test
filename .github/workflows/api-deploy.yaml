@@ -21,33 +21,25 @@ jobs:
           path: ${{ github.workspace }}
           name: api
 
-      - name: List Files
+      - name: List Workspace Files
         run: ls -al
 
       - name: Load Image
         run: |
           docker load -i api.tar
+
+      - name: List Images
+        run: |
           docker image ls -a
 
-      - name: Install Power Platform Tools
-        uses: microsoft/powerplatform-actions/actions-install@v1.2.0
-
-      - name: Create Solution Zip
-        id: create-zip
+      - name: Login to Docker Hub
         run: |
-          docker create --name build-container api
-          docker start build-container
-          docker exec build-container ls -la
-          docker exec build-container zip solution.zip dist
-          docker cp build-container:/app/solution.zip .
-          docker stop build-container
-          docker rm build-container
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Import Solution
-        uses: microsoft/powerplatform-actions/import-solution@v1.2.0
-        with:
-          solution-file: solution.zip
-          environment-url: https://org628a9ff7.crm3.dynamics.com
-          app-id: ${{ secrets.APP_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET }}
-          tenant-id: ${{ secrets.TENANT_ID }}
+      - name: Tag Image
+        run: |
+          docker tag power-platform-test_api ${{ secrets.IMAGE_REPO }}/api:latest
+
+      - name: Push Image
+        run: |
+          docker push ${{ secrets.IMAGE_REPO }}/api:latest
