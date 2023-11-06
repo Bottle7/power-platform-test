@@ -54,7 +54,7 @@ jobs:
         run: |
           docker push ${{ secrets.IMAGE_REPO }}:latest
 
-      # Login to Azure for CLI access
+      # Login to Azure
       - name: Set up Azure CLI
         run: |
           az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
