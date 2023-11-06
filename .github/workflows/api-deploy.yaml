@@ -47,12 +47,12 @@ jobs:
       # Tag the image with the latest tag
       - name: Tag Image
         run: |
-          docker tag api ${{ secrets.IMAGE_REPO }}/api:latest
+          docker tag api bbouchard7/power-platform-demo/api:latest
 
       # Push the image to Docker Hub
       - name: Push Image
         run: |
-          docker push ${{ secrets.IMAGE_REPO }}/api:latest
+          docker push bbouchard7/power-platform-demo/api:latest
 
       # Login to Azure
       - name: Set up Azure CLI
@@ -64,4 +64,4 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: power-platform-demo
-          images: ${{ secrets.IMAGE_REPO }}/api:latest
+          images: bbouchard7/power-platform-demo/api:latest
