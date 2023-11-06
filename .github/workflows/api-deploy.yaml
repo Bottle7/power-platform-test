@@ -46,7 +46,7 @@ jobs:
       # Tag the image with the latest tag
       - name: Tag Image
         run: |
-          docker tag power-platform-test_api ${{ secrets.IMAGE_REPO }}/api:latest
+          docker tag api ${{ secrets.IMAGE_REPO }}/api:latest
 
       # Push the image to Docker Hub
       - name: Push Image
