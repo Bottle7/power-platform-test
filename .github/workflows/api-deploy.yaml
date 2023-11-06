@@ -14,6 +14,7 @@ jobs:
     if: github.event.workflow_run.conclusion == 'success'
     environment: development
     steps:
+      # Get the built image from the build workflow
       - name: Download Built Image
         uses: dawidd6/action-download-artifact@v2
         with:
@@ -21,33 +22,41 @@ jobs:
           path: ${{ github.workspace }}
           name: api
 
+      # List the files in the runner's workspace
       - name: List Workspace Files
         run: ls -al
 
+      # Load the built image tar file into the current Docker context
       - name: Load Image
         run: |
           docker load -i api.tar
 
+      # List the images in the current Docker context
       - name: List Images
         run: |
           docker image ls -a
 
+      # Login to Docker Hub
       - name: Login to Docker Hub
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
+      # Tag the image with the latest tag
       - name: Tag Image
         run: |
           docker tag power-platform-test_api ${{ secrets.IMAGE_REPO }}/api:latest
 
+      # Push the image to Docker Hub
       - name: Push Image
         run: |
           docker push ${{ secrets.IMAGE_REPO }}/api:latest
 
+      # Login to Azure
       - name: Set up Azure CLI
         run: |
           az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
+      # Deploy the image to Azure Web App for Containers
       - name: Deploy to Azure
         uses: azure/webapps-deploy@v2
         with:
